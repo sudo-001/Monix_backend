@@ -9,7 +9,7 @@ const bodyparser = require("body-parser");
 app.use(bodyparser.json());
 
 // Socket io section
-io.on("connection", (socket) => {
+io.on("connect", (socket) => {
   console.log("a user connected");
 });
 
@@ -24,7 +24,7 @@ const conn = mysql.createConnection({
 
 conn.connect((err) => {
   if (err) throw err;
-  console.log("Mysql COnnected succesfful to database !!");
+  console.log("Mysql Connected succesfful to database !!");
 });
 
 
@@ -58,8 +58,8 @@ app.post("/api/users", (req, res) => {
   let data = {
     name: req.body.name,
     phone: req.body.phone,
-    password: req.body.password,
-    amount: 500,
+    password: req.boby.password,
+    amount: 0,
   };
 
   let sqlQuery = "INSERT INTO users SET ?";
@@ -167,6 +167,6 @@ app.delete("/api/transactions/:id", (req, res) => {
 //   res.send("<h1>Acceuil</h1>");
 // });
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log("server running on port " + port);
 });
